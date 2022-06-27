@@ -1,0 +1,72 @@
+///// escreva em um arquivo de formato txt n valores de um ciclo onde N é dado pelo usuario/////////
+
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <locale>
+#include <math.h>
+
+using namespace std;
+
+/*
+Modos de abertura   Descrição
+ios::in Abre para leitura (default de ifstream).
+ios::out Abre para gravação (default de ofstream),
+ios::ate Abre e posiciona no final do arquivo.
+(Este modo trabalha com leitura e gravação)
+ios::app Grava a partir do fim do arquivo
+ios::trunc Abre e apaga todo o conteúdo do arquivo
+ios::nocreate Erro de abertura se o arquivo não existe
+ios::noreplace Erro de abertura se o arquivo existir
+ios::binary Abre em binário (default é texto)
+
+*/
+
+
+#define NE12 12
+const int vsin[]={0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1,
+                  0,1,2,3,4,5,6,7,8,9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-8,-7,-6,-5,-4,-3,-2,-1};
+
+int main()
+{
+   int numero;
+   int N;
+   string nome;
+      cout <<"digite o valor de N" <<endl;
+      std::cin >> N;
+
+   setlocale(LC_ALL,"");
+
+   string sen="Senoide.txt";
+   ofstream senoide; // outFile é o arquivo onde a saída será escrita/////////elemento usado para enviar arquivos de texto
+   senoide.open(sen, ios::out); // abre o arquivo para escrita
+   if (! senoide)
+     { cout << "Arquivo " << sen << " não pode ser aberto" << endl;
+       return -1;
+   }
+   cout << "Exemplo escrita em arquivos";
+   cout << "Serie numerica E12" << endl;
+
+   senoide << "Exemplo escrita em arquivos \n";
+   senoide << "Serie numerica E12 \n";
+
+   for (int i=0;i<N;i++)
+   {
+       senoide << vsin[i] << '\n';
+   }
+
+
+
+  senoide.close(); // se o programador omitir a chamada ao método close
+
+  return 0; // o finalizador se encarrega de fechar o arquivo
+  }
