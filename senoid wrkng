@@ -1,0 +1,67 @@
+///// escreva em um arquivo de formato txt n valores de um ciclo onde N é dado pelo usuario/////////
+
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <locale>
+#include <math.h>
+
+using namespace std;
+
+/*
+Modos de abertura   Descrição
+ios::in Abre para leitura (default de ifstream).
+ios::out Abre para gravação (default de ofstream),
+ios::ate Abre e posiciona no final do arquivo.
+(Este modo trabalha com leitura e gravação)
+ios::app Grava a partir do fim do arquivo
+ios::trunc Abre e apaga todo o conteúdo do arquivo
+ios::nocreate Erro de abertura se o arquivo não existe
+ios::noreplace Erro de abertura se o arquivo existir
+ios::binary Abre em binário (default é texto)
+
+*/
+
+
+#define NE12 12
+
+int main()
+{
+
+   int valores;
+   int changeN;
+   string name;
+   double PI  = 3.14159265359;
+   setlocale(LC_ALL,"");
+
+   string nameData="Senoide com N valores.txt";
+
+   ofstream outData; // outFile é o arquivo onde a saída será escrita/////////elemento usado para enviar arquivos de texto
+
+   outData.open(nameData, ios::out); // abre o arquivo para escrita
+   if (! outData)
+     { cout << "Arquivo " << nameData << " não pode ser aberto" << endl;
+       return -1;
+   }
+   cout<< "escolha o numero de valores"<< endl;
+   cin >> valores;
+   cout<<"numeros escolhidos ="<< valores<<endl;
+
+   double valueCalculated;
+   valueCalculated = ((2*PI)/valores);
+   double rslt = valueCalculated;
+
+   for (int x=0;x<valores;x++)
+   {
+       outData << x <<' '<< sin(valueCalculated)<<endl;
+       valueCalculated =rslt+valueCalculated;
+   }
+
+
+
+  outData.close(); // se o programador omitir a chamada ao método close
+
+  return 0; // o finalizador se encarrega de fechar o arquivo
+  }
