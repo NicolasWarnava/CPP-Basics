@@ -1,0 +1,87 @@
+/*Abra um arquivo no formato txt contendo um texto. Analise o conteúdo e gere o seguinte relatório (na tela) . O nome do arquivo é fixo no código.
+Quantidade de caracteres espaço.
+Quantidade de linhas do texto.
+Quantidade de vogais.
+Quantidade de artigos definidos.*/
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>
+#include <string>
+#include <locale>
+
+using namespace std;
+
+/*
+Modos de abertura Descrição
+ios::in Abre para leitura (default de ifstream).
+ios::out Abre para gravação (default de ofstream),
+ios::ate Abre e posiciona no final do arquivo.
+(Este modo trabalha com leitura e gravação)
+ios::app Grava a partir do fim do arquivo
+ios::trunc Abre e apaga todo o conteúdo do arquivo
+ios::nocreate Erro de abertura se o arquivo não existe
+ios::noreplace Erro de abertura se o arquivo existir
+ios::binary Abre em binário (default é texto)
+*/
+
+int main()
+{
+
+
+  ifstream ler; // inFile é o arquivo de leitura dos dados
+
+  setlocale(LC_ALL,"");//seleciona linguagem
+
+  string palavra;
+  char caractere;
+  int Nstring=0;
+  int Nlinhas=0;
+  int Nvogais=0;
+  int Nspaces=0;
+  int Ndef_art=0;
+
+  char linha[200];
+
+  ler.open("horse tutorial.txt", ios::in); // abre o arquivo para leitura
+
+  if (! ler)
+     { cerr << "Arquivo saida.txt nao pode ser aberto" << endl;
+      return -1;
+     }
+while(ler.get(caractere)){
+    if(caractere == 'a'||'e'||'i'|| 'o' || 'u'||'A'||'E'||'I'|| 'O'|| 'U'){
+        Nvogais++;
+    }
+}
+ler.close();
+ler.open("horse tutorial.txt", ios::in);
+while(ler.get(caractere)){
+    if(caractere == ' '){
+        Nspaces++;
+    }
+}
+ler.close();
+ler.open("horse tutorial.txt", ios::in);
+
+while(ler >> palavra){
+    Nstring = Nstring + 1;
+}
+ler.close();
+ler.open("horse tutorial.txt", ios::in);
+
+
+while(ler.getline(linha,200)){
+    Nlinhas = Nlinhas + 1;
+}
+
+cout<<"numero de palavras "<< Nstring << endl;
+cout<<"numero de linhas "  << Nlinhas  << endl;
+cout<<"numero de vogais "  << Nvogais << endl;
+cout<<"numero de espaços "  << Nspaces << endl;
+cout<<"numero de artigos definidos "  << Ndef_art << endl;
+
+ ler.close(); // se o programador omitir a chamada ao método close
+ return 0; // o finalizador se encarrega de fechar o arquivo
+ }
