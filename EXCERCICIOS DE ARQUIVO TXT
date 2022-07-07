@@ -75,6 +75,13 @@ ler.open("horse tutorial.txt", ios::in);
 while(ler.getline(linha,200)){
     Nlinhas = Nlinhas + 1;
 }
+ler.close();
+ler.open("horse tutorial.txt", ios::in);
+while(ler.get(caractere)){
+    if(caractere == 'a'||'o'||'as'||'os'){
+        Ndef_art_++;
+    }
+}
 
 cout<<"numero de palavras "<< Nstring << endl;
 cout<<"numero de linhas "  << Nlinhas  << endl;
