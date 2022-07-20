@@ -1,0 +1,148 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>
+#include <string>
+#include <locale>
+#include <time.h>
+#include <stdio.h>
+
+using namespace std;
+//função usada para converter o codigo cripitografado para descripitografado
+char converter(char ch, int chave)
+{
+    if (!isalpha(ch)) return ch;
+    char offset = isupper(ch) ? 'A' : 'a';
+    return (char)((((ch + chave) - offset) % 26) + offset);
+}
+
+string criptografar( string entrada, int chave )
+{
+    string saida = "";
+    size_t len = entrada.size();
+    for( size_t i = 0; i < len; i++ )
+        saida += converter( entrada[i], chave );
+    return saida;
+}
+
+string decriptografar( string entrada, int chave )
+{
+    return criptografar( entrada, 26 - chave );
+}
+
+char converterX(char ky, int key)
+{
+    if (!isalpha(ky)) return ky;
+    char offset = isupper(ky) ? 'A' : 'a';
+    return (char)((((ky + key) - offset) % 26) + offset);
+}
+
+string criptografarX( string ent, int key )
+{
+    string sai = "";
+    size_t len = ent.size();
+    for( size_t i = 0; i < len; i++ )
+        sai += converterX( ent[i], key );
+    return sai;
+}
+string decriptografarX( string ent, int key )
+{
+    return criptografarX( ent, 26 - key );
+}
+
+
+int main( void )
+{
+    srand(time(0));
+    int chave = 5;
+    int key = rand()%9;
+
+    setlocale(LC_ALL,"");
+
+
+    // Cria um objeto que lê informações do arquivo de texto.
+    ifstream leitura;
+
+    // Pede e captura o nome do arquivo de texto, sem o ".txt".
+    string arq;
+    ////função para pegar o nome do arquivo.txt
+    cout<<"digite o nome do arquivo.txt 'utilizar o .txt no final'"<<endl;
+    cin>>arq;
+
+
+        // Abre o arquivo de texto no modo de leitura.
+    leitura.open(arq, ios::in);
+
+    // Se o arquivo não for encontrado/aberto, o programa informará ao usuário.
+    if (! leitura) {
+        cerr << "Arquivo " << arq << " não pode ser aberto." << endl;
+        return -1;
+     }
+    //string que armazena as palavras do texto
+      string palavra;
+      //while que passara as palavras do arquivo para a string
+     while (leitura >> palavra)
+
+   leitura.close();
+   //string para saida de texto
+   string nomeArq="msg_original.txt";
+
+   ofstream outFile; // outFile é o arquivo onde a saída será escrita
+   outFile.open(nomeArq, ios::out); // abre o arquivo para escrita
+   if (! outFile)
+     { cout << "Arquivo " << nomeArq << " não pode ser aberto" << endl;
+       return -1;
+   }
+   //dados que serão escritos no arquivo de saida
+   outFile<<palavra;
+   //fecha o arquivo
+   outFile.close();
+
+    //////DESLOCA 5
+
+   string A="msg_desloca_5.txt";
+
+   ofstream outF; // outF é o arquivo onde a saída será escrita
+   outF.open(A, ios::out); // abre o arquivo para escrita
+   if (! outF)
+     { cout << "Arquivo " << A << " não pode ser aberto" << endl;
+       return -1;
+   }
+   //string usada para a saida criptografada da palavra
+    string cripto = criptografar( palavra, chave );
+   //dados que serão escritos no arquivo de saida
+   outF<<cripto;
+   //fecha o arquivo
+   outF.close();
+
+   ////desloca x
+
+   string X="msg_desloca_x.txt";
+
+   ofstream outX; // outX é o arquivo onde a saída será escrita
+   outX.open(X, ios::out); // abre o arquivo para escrita
+   if (! outX)
+     { cout << "Arquivo " << X << " não pode ser aberto" << endl;
+       return -1;
+   }
+   //string usada para a saida criptografada da palavra
+    string criptox = criptografarX( palavra, key );
+   //dados que serão escritos no arquivo de saida
+   outX<<criptox;
+   //fecha o arquivo
+   outX.close();
+   /////////////
+    //saida para cifra de 5
+    cout << "Texto Cifrado: " << cripto << endl;
+    string decripto = decriptografar( cripto, chave );
+    cout << "Texto Decifrado: " << decripto << endl;
+
+    //saida para cifra de X
+    cout << "Texto Cifrado X: " << criptox << endl;
+    string decriptox = decriptografarX( criptox, key );
+    cout << "Texto Decifrado X: " << decriptox << endl;
+
+    ////////
+    cout<<"Nicolas Warnava da Silva e Thales Harff. Turma:4311"<< endl;
+    return 0;
+}
