@@ -8,14 +8,14 @@
 #include <stdio.h>
 
 using namespace std;
-//função usada para converter o codigo cripitografado para descripitografado
+///função usada para converter o codigo cripitografado para descripitografado
 char converter(char ch, int chave)
 {
     if (!isalpha(ch)) return ch;
     char offset = isupper(ch) ? 'A' : 'a';
     return (char)((((ch + chave) - offset) % 26) + offset);
 }
-
+///funçao para criptografar
 string criptografar( string entrada, int chave )
 {
     string saida = "";
@@ -24,19 +24,19 @@ string criptografar( string entrada, int chave )
         saida += converter( entrada[i], chave );
     return saida;
 }
-
+///funçao para descriptografar
 string decriptografar( string entrada, int chave )
 {
     return criptografar( entrada, 26 - chave );
 }
-
+///função usada para converter o codigo cripitografado para descripitografado
 char converterX(char ky, int key)
 {
     if (!isalpha(ky)) return ky;
     char offset = isupper(ky) ? 'A' : 'a';
     return (char)((((ky + key) - offset) % 26) + offset);
 }
-
+///funçao para criptografar
 string criptografarX( string ent, int key )
 {
     string sai = "";
@@ -45,6 +45,7 @@ string criptografarX( string ent, int key )
         sai += converterX( ent[i], key );
     return sai;
 }
+///funçao para descriptografar
 string decriptografarX( string ent, int key )
 {
     return criptografarX( ent, 26 - key );
@@ -53,9 +54,16 @@ string decriptografarX( string ent, int key )
 
 int main( void )
 {
+    //nume de deslocamento fixo
+     int chave = 5;
+
+    //gera um numero aleatorio de deslocamento
     srand(time(0));
-    int chave = 5;
     int key = rand()%9;
+//if usado para o valor de deslocamente nunca seja 0, e a palavra não fique sem ser cifrada
+    if(key==0){
+        key=key+1;
+    }
 
     setlocale(LC_ALL,"");
 
@@ -98,7 +106,7 @@ int main( void )
    //fecha o arquivo
    outFile.close();
 
-    //////DESLOCA 5
+    ///DESLOCA 5
 
    string A="msg_desloca_5.txt";
 
@@ -115,7 +123,7 @@ int main( void )
    //fecha o arquivo
    outF.close();
 
-   ////desloca x
+   ///desloca x
 
    string X="msg_desloca_x.txt";
 
@@ -132,10 +140,15 @@ int main( void )
    //fecha o arquivo
    outX.close();
    /////////////
+
+   //espaço
+   cout<<endl;
     //saida para cifra de 5
     cout << "Texto Cifrado: " << cripto << endl;
     string decripto = decriptografar( cripto, chave );
     cout << "Texto Decifrado: " << decripto << endl;
+
+    cout<<endl;
 
     //saida para cifra de X
     cout << "Texto Cifrado X: " << criptox << endl;
@@ -143,6 +156,7 @@ int main( void )
     cout << "Texto Decifrado X: " << decriptox << endl;
 
     ////////
+    cout<<endl;
     cout<<"Nicolas Warnava da Silva e Thales Harff. Turma:4311"<< endl;
     return 0;
 }
