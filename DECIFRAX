@@ -8,8 +8,6 @@
 #include <stdio.h>
 
 using namespace std;
-//variaveis globais
-int Nvogais;
 ///função usada para converter o codigo cripitografado para descripitografado
 char converter(char ch, int chave)
 {
@@ -60,23 +58,12 @@ int main( void )
      int chave = 5;
 
     //gera um numero aleatorio de deslocamento
-//    srand(time(0));
-//    int key = rand()%9;
+    srand(time(0));
+    int key = rand()%9;
 //if usado para o valor de deslocamente nunca seja 0, e a palavra não fique sem ser cifrada
-//    if(key==0){
-//        key=key+1;
-//    }
-  leitura.open(arq, ios::in); // abre o arquivo para leitura
-
-  if (! leitura)
-     { cerr << "Arquivo saida.txt nao pode ser aberto" << endl;
-      return -1;
-     }
-while(leitura.get(caractere)){
-    if(caractere == 'a'||'e'||'i'|| 'o' || 'u'||'A'||'E'||'I'|| 'O'|| 'U'){
-        Nvogais++;
+    if(key==0){
+        key=key+1;
     }
-}
 
     setlocale(LC_ALL,"");
 
